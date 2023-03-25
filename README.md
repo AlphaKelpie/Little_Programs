@@ -26,6 +26,8 @@ The program try to upgrade packages one by one, executing the HomeBrew command:
 brew upgrade <*name of the package*>  
 so before check dependencies, download files of the dependencies and of the package, try to install the dependencies and then the package.
 If it was not able to upgrade some packages or dependencies, it print the error that HomeBrew returns.
+When it has tried to upgrade all the packages in the list, it's call the cleanup function althought it is usually called after any upgrade automatically:  
+brew cleanup  
 At the end of the program, it prints the list of packages that was not able to upgrade.
 A common error is that the version of your computer is not supported becouse too old.
 In that case the only solution is to upgrade the operating system (or be better than me in these stuff, that is not so difficult).
