@@ -1,5 +1,5 @@
 """how to upgrade all packages by homebrew"""
-
+#use an if over stderr of packages: if false stop program
 import subprocess
 
 """find outdated packages"""
