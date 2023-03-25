@@ -19,7 +19,7 @@ for i in outdated_list:
     command[2] = i
     upgrade = subprocess.run(command, stderr=subprocess.PIPE,
                              text=True, check=False)
-    if upgrade.stderr != '':
+    if upgrade.stderr != '':#remove this and create a control between list (if doesn't work)
         error_str = upgrade.stderr
         print(error_str)
         exception = exception + '\t' + i
