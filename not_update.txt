@@ -1,0 +1,14 @@
+davix
+fftw
+gcc
+gd
+graphviz
+libtiff
+netpbm
+numpy
+open-mpi
+openblas
+root
+webp
+xrootd
+zstd
