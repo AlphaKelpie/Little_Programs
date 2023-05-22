@@ -1,30 +1,61 @@
 """how to upgrade all packages by homebrew"""
-#use an if over stderr of packages: if false stop program
+
 import subprocess
 
-"""find outdated packages"""
+
+#create some string
+ast_start = '\n\n' + '*'*30 + '\n' + '*'*30 + '\n'
+ast_end = '\n' + '*'*30 + '\n' + '*'*30 + '\n\n'
+
+
+#upload list of packages to not upgrade
+not_update = []
+with open("not_update.txt","r") as input_file:
+    lines = input_file.readlines()
+for line in lines:
+    line = line.replace('\n','')
+    not_update.append(line)
+
+
+#find outdated packages
 packages = subprocess.run(["brew", "outdated"], stdout=subprocess.PIPE,
                           text=True, check=False)
-outdated_str = packages.stdout
-print(outdated_str)
+outdated = packages.stdout.split()
+print(ast_start, 'Packages that are updated:\n', '\n'.join(str(i) for i in outdated), ast_end)
+print(ast_start, 'Packages that will not be upgraded:\n',
+      '\n'.join(str(i) for i in not_update), ast_end)
 
-outdated_list = outdated_str.split()
 
-"""upgrade packages one by one & manage un-upgradable packages"""
-exception = """*********************************||\n||
-            \n*********************************||\n
-            I was not be able to upgrade these packages:"""
+#upgrade packages one by one & manage un-upgradable packages
 command = ["brew", "upgrade", ""]
-for i in outdated_list:
-    command[2] = i
-    upgrade = subprocess.run(command, stderr=subprocess.PIPE,
-                             text=True, check=False)
-    if upgrade.stderr != '':#remove this and create a control between list (if doesn't work)
-        error_str = upgrade.stderr
-        print(error_str)
-        exception = exception + '\t' + i
+for i in outdated:
+    if i in not_update:
+        continue
+    else:
+        command[2] = i
+        upgrade = subprocess.run(command, stderr=subprocess.PIPE,
+                                 text=True, check=False)
+        if upgrade.stderr != '':#remove this and create a control between list (if doesn't work)
+            error_str = upgrade.stderr
+            print(error_str)
+            not_update.append(i)
 
-clean = subprocess.run(["brew", "cleanup"], check=False)
 
-if exception.find('\t'):
-    print(exception)
+#clean
+print(ast_start, 'Clean cache and outdated downloads')
+clean = subprocess.run(["brew", "cleanup", "--prune=all"], check=False)
+print(ast_end)
+
+
+#return packages still outdated
+packages = subprocess.run(["brew", "outdated"], stdout=subprocess.PIPE,
+                          text=True, check=False)
+outdated = packages.stdout.split()
+if outdated != []:
+    print(ast_start, 'I was not able to upgrade these packages:\n',
+          '\n'.join(str(i) for i in outdated), ast_end)
+
+
+#download packages not upgraded
+with open('not_update.txt', 'w') as outfile:
+    outfile.write('\n'.join(str(i) for i in not_update))
