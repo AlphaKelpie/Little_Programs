@@ -12,3 +12,7 @@ root
 webp
 xrootd
 zstd
+c-ares
+glib
+libcython
+meson
