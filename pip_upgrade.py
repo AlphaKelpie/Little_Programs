@@ -2,8 +2,11 @@
 
 import subprocess
 
+#upgrade pip
+print("\tI upgrade pip\n")
 subprocess.run(['pip', 'install', 'pip', '--upgrade'], check=False)
-"""find list of packages"""
+
+#find list of packages
 pakages = subprocess.run(["pip", "list"], stdout=subprocess.PIPE,
                          text=True, check=False)
 vlist = pakages.stdout
@@ -16,13 +19,18 @@ while i < len(vlist):
     del vlist[i]
     i += 1
 
-"""upgrade packages one by one"""
+#upgrade packages one by one
 for i in vlist:
-    print(f"\n\n\tI'm checking to upgrade {i}")
+    print(f"\n\n\tI'm checking to upgrade {i}\n")
     command = ["pip", "install", '--upgrade', i]
     upgrade = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                          text=True, check=False)
     print(upgrade.stdout)
+
+#clean cache
+print("\n\n\tI clean the cache")
+subprocess.run(['pip', 'cache', 'purge'], check=False)
+
 
 # """manage errors"""
 # exception = ["\n\n",
