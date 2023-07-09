@@ -1,9 +1,13 @@
 davix
 fftw
+flac
 gcc
 gd
+glib
 graphviz
+libcython
 libtiff
+meson
 netpbm
 numpy
 open-mpi
@@ -12,7 +16,3 @@ root
 webp
 xrootd
 zstd
-c-ares
-glib
-libcython
-meson
