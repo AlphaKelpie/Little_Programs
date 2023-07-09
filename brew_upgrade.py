@@ -52,10 +52,12 @@ packages = subprocess.run(["brew", "outdated"], stdout=subprocess.PIPE,
                           text=True, check=False)
 outdated = packages.stdout.split()
 if outdated != []:
+    outdated.sort()
     print(ast_start, 'I was not able to upgrade these packages:\n',
           '\n'.join(str(i) for i in outdated), ast_end)
 
 
-#download packages not upgraded
+#download packages not upgraded in txt
+not_update.sort()
 with open('not_update.txt', 'w') as outfile:
     outfile.write('\n'.join(str(i) for i in not_update))
