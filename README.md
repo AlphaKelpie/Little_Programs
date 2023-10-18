@@ -3,7 +3,7 @@ Some programs to menage
 
 ## Table
 [In](#introduction)
-[A](#brew_upgrade.py)
+[A](#brew_upgrade)
 
 ## Introduction
 
