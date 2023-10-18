@@ -3,7 +3,7 @@ Some programs to menage
 
 ## Table
 1. [In](#introduction)
-2. [A](#brew_upgrade)
+2. [A](#brew)
 
 ## Introduction
 
