@@ -1,10 +1,6 @@
 # Little_Programs
 Some programs to menage
 
-## Table
-1. [In](#introduction)
-2. [A](#brew)
-
 ## Introduction
 
 In this repository I put some program that could be usefull to menage packages, file or other.  
