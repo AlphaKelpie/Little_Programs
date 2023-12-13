@@ -1,13 +1,14 @@
 """how to upgrade pakages with pip automatically"""
 
-import subprocess
+from subprocess import run, PIPE
 
 #upgrade pip
-print("\tI upgrade pip\n")
-subprocess.run(['pip', 'install', 'pip', '--upgrade'], check=False)
+print("\tI upgrade pip")
+run(['pip', 'install', 'pip', '--upgrade'], check=False)
 
+print("\n\n\tI upgrade pip packages\n")
 #find list of packages
-pakages = subprocess.run(["pip", "list"], stdout=subprocess.PIPE,
+pakages = run(["pip", "list"], stdout=PIPE,
                          text=True, check=False)
 vlist = pakages.stdout
 
@@ -21,15 +22,23 @@ while i < len(vlist):
 
 #upgrade packages one by one
 for i in vlist:
-    print(f"\n\n\tI'm checking to upgrade {i}\n")
+    print(f"\n\n\033[1;52mI'm checking to upgrade {i}\033[0;0m")
     command = ["pip", "install", '--upgrade', i]
-    upgrade = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                         text=True, check=False)
-    print(upgrade.stdout)
+    upgrade = run(command, stdout=PIPE, text=True, check=True)
+    out = upgrade.stdout
+    outs = out.split('\n')
+
+    del outs[-1]
+    already_update = all("Requirement already satisfied:" in s for s in outs)
+    if already_update:
+        print(f"\033[1;32m{i} is already updated\033[0;0m\n")
+    else:
+        print('\n'.join(str(i) for i in outs))
+
 
 #clean cache
 print("\n\n\tI clean the cache")
-subprocess.run(['pip', 'cache', 'purge'], check=False)
+run(['pip', 'cache', 'purge'], check=False)
 
 
 # """manage errors"""
