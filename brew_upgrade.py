@@ -1,6 +1,6 @@
 """how to upgrade all packages by homebrew"""
 
-import subprocess
+from subprocess import run, PIPE
 
 
 #create some string
@@ -10,7 +10,7 @@ ast_end = '\n' + '*'*30 + '\n' + '*'*30 + '\n\n'
 
 #upload list of packages to not upgrade
 not_update = []
-with open("not_update.txt","r") as input_file:
+with open("not_upgrade.txt","r") as input_file:
     lines = input_file.readlines()
 for line in lines:
     line = line.replace('\n','')
@@ -18,10 +18,10 @@ for line in lines:
 
 
 #find outdated packages
-packages = subprocess.run(["brew", "outdated"], stdout=subprocess.PIPE,
-                          text=True, check=False)
-outdated = packages.stdout.split()
-print(ast_start, 'Packages that are updated:\n', '\n'.join(str(i) for i in outdated), ast_end)
+packages = run(["brew", "outdated"], stdout=PIPE,
+                          text=True, check=True)
+outdated = stdout.split()
+print(ast_start, 'Packages that are outdated:\n', '\n'.join(str(i) for i in outdated), ast_end)
 print(ast_start, 'Packages that will not be upgraded:\n',
       '\n'.join(str(i) for i in not_update), ast_end)
 
@@ -33,7 +33,7 @@ for i in outdated:
         continue
     else:
         command[2] = i
-        upgrade = subprocess.run(command, stderr=subprocess.PIPE,
+        upgrade = run(command, stderr=PIPE,
                                  text=True, check=False)
         if upgrade.stderr != '':#remove this and create a control between list (if doesn't work)
             error_str = upgrade.stderr
@@ -59,5 +59,5 @@ if outdated != []:
 
 #download packages not upgraded in txt
 not_update.sort()
-with open('not_update.txt', 'w') as outfile:
+with open('not_upgrade.txt', 'w') as outfile:
     outfile.write('\n'.join(str(i) for i in not_update))
