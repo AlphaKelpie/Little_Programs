@@ -3,8 +3,12 @@
 from subprocess import run, PIPE
 
 #upload list of packages to not upgrade
+not_upgrade = []
 with open('not_upgrade_pip.txt', 'r') as file:
-  not_upgrade = [line.strip() for line in file]
+    lines = file.readlines()
+    for line in lines:
+        not_upgrade.append(line.split(' ')[0])
+
 
 #upgrade pip
 print("\tI upgrade pip")
