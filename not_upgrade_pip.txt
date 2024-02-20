@@ -1,5 +1,4 @@
-wrapt 1.14
+wrapt 1.14.1
 ml-dtypes 0.2.0
-keras 2.15
-llvmlite 0.42
-protobuf 4.23
+keras 2.15.0
+tensorboard 2.15.2
