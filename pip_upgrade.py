@@ -2,6 +2,10 @@
 
 from subprocess import run, PIPE
 
+#upload list of packages to not upgrade
+with open('not_upgrade_pip.txt', 'r') as file:
+  not_upgrade = [line.strip() for line in file]
+
 #upgrade pip
 print("\tI upgrade pip")
 run(['pip', 'install', 'pip', '--upgrade'], check=False)
@@ -23,6 +27,9 @@ while i < len(vlist):
 #upgrade packages one by one
 for i in vlist:
     print(f"\n\n\033[1;52mI'm checking to upgrade {i}\033[0;0m")
+    if i in not_upgrade:
+        print(f"\033[0;31m{i} will not be upgraded\033[0;0m")
+        continue
     command = ["pip", "install", '--upgrade', i]
     upgrade = run(command, stdout=PIPE, text=True, check=True)
     out = upgrade.stdout
@@ -33,7 +40,8 @@ for i in vlist:
     if already_update:
         print(f"\033[1;32m{i} is already updated\033[0;0m\n")
     else:
-        print('\n'.join(str(i) for i in outs))
+        # print('\n'.join(str(i) for i in outs))
+        print(f"\033[1;32m{outs[-1]}\033[0;0m\n")
 
 
 #clean cache
