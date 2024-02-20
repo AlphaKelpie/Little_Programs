@@ -1,0 +1,5 @@
+wrapt 1.14
+ml-dtypes 0.2.0
+keras 2.15
+llvmlite 0.41
+protobuf 4.23
