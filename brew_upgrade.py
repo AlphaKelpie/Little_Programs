@@ -20,7 +20,7 @@ for line in lines:
 #find outdated packages
 packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=True)
-outdated = stdout.split()
+outdated = packages.stdout.split()
 print(ast_start, 'Packages that are outdated:\n', '\n'.join(str(i) for i in outdated), ast_end)
 print(ast_start, 'Packages that will not be upgraded:\n',
       '\n'.join(str(i) for i in not_update), ast_end)
@@ -31,24 +31,18 @@ command = ["brew", "upgrade", ""]
 for i in outdated:
     if i in not_update:
         continue
-    else:
-        command[2] = i
-        upgrade = run(command, stderr=PIPE,
-                                 text=True, check=False)
-        if upgrade.stderr != '':#remove this and create a control between list (if doesn't work)
-            error_str = upgrade.stderr
-            print(error_str)
-            not_update.append(i)
+    command[2] = i
+    run(command, stderr=PIPE, text=True, check=False)
 
 
 #clean
 print(ast_start, 'Clean cache and outdated downloads')
-clean = subprocess.run(["brew", "cleanup", "--prune=all"], check=False)
+clean = run(["brew", "cleanup", "--prune=all"], check=False)
 print(ast_end)
 
 
 #return packages still outdated
-packages = subprocess.run(["brew", "outdated"], stdout=subprocess.PIPE,
+packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=False)
 outdated = packages.stdout.split()
 if outdated != []:
@@ -58,6 +52,6 @@ if outdated != []:
 
 
 #download packages not upgraded in txt
-not_update.sort()
+outdated.sort()
 with open('not_upgrade.txt', 'w') as outfile:
-    outfile.write('\n'.join(str(i) for i in not_update))
+    outfile.write('\n'.join(str(i) for i in outdated))
