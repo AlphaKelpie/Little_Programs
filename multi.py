@@ -3,9 +3,9 @@ from datetime import datetime as dt
 from time import sleep
 
 def fun(i) :
-  with open(f'/Users/Alpha/{i}.txt', 'w') as file:
-    file.write(f'File {i}')
   sleep(2)
+  with open(f'./{i}.txt', 'w') as file:
+    file.write(f'File {i}')
 
 if __name__ == "__main__" :
   NUM = 16
