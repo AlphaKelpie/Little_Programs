@@ -22,8 +22,8 @@ packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=True)
 outdated = packages.stdout.split()
 print(ast_start, 'Packages that are outdated:\n', '\n'.join(str(i) for i in outdated), ast_end)
-print(ast_start, 'Packages that will not be upgraded:\n',
-      '\n'.join(str(i) for i in not_update), ast_end)
+print(ast_start, 'Packages that will be upgraded:\n',
+      '\n'.join(str(i) for i in list(set(outdated) - set(not_update))), ast_end)
 
 
 #upgrade packages one by one & manage un-upgradable packages
@@ -45,13 +45,12 @@ print(ast_end)
 packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=False)
 outdated = packages.stdout.split()
+outdated.sort()
 if outdated != []:
-    outdated.sort()
     print(ast_start, 'I was not able to upgrade these packages:\n',
           '\n'.join(str(i) for i in outdated), ast_end)
 
 
 #download packages not upgraded in txt
-outdated.sort()
 with open('not_upgrade.txt', 'w') as outfile:
     outfile.write('\n'.join(str(i) for i in outdated))
