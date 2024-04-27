@@ -1,0 +1,8 @@
+cabal-install
+emacs
+gd
+ghc
+graphviz
+node
+pandoc
+root
