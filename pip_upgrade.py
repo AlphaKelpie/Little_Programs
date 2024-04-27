@@ -42,7 +42,7 @@ for i in vlist:
     del outs[-1]
     already_update = all("Requirement already satisfied:" in s for s in outs)
     if already_update:
-        print(f"\033[1;32m{i} is already updated\033[0;0m\n")
+        print(f"\033[1;36m{i} is already updated\033[0;0m\n")
     else:
         # print('\n'.join(str(i) for i in outs))
         print(f"\033[1;32m{outs[-1]}\033[0;0m\n")
@@ -51,27 +51,3 @@ for i in vlist:
 #clean cache
 print("\n\n\tI clean the cache")
 run(['pip', 'cache', 'purge'], check=False)
-
-
-# """manage errors"""
-# exception = ["\n\n",
-#             "*********************************\n",
-#             "\n*********************************",
-#             "I was not be able to upgrade these packages:\t"]
-# while upgrade.stderr != '':
-#     error_str = upgrade.stderr
-#     error_list = error_str.split()
-#     error_package = error_list[3]
-#     error_package = error_package.replace('\'', '')
-#     error_package = error_package.replace('.', '')
-#     command.remove(error_package)
-#     error_package += ", "
-#     exception = exception + [error_package]
-#     upgrade = subprocess.run(command, stdout=subprocess.PIPE,
-#                              stderr=subprocess.PIPE, text=True, check=False)
-
-# print(upgrade.stdout)
-
-# if len(exception) > 4:
-#     for element in exception:
-#         print(element)
