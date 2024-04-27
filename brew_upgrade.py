@@ -22,16 +22,18 @@ packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=True)
 outdated = packages.stdout.split()
 print(ast_start, 'Packages that are outdated:\n', '\n'.join(str(i) for i in outdated), ast_end)
+will_be = list(set(outdated) - set(not_update))
+will_be.sort()
 print(ast_start, 'Packages that will be upgraded:\n',
-      '\n'.join(str(i) for i in list(set(outdated) - set(not_update))), ast_end)
+      '\n'.join(str(i) for i in will_be), ast_end)
 
 
 #upgrade packages one by one & manage un-upgradable packages
-command = ["brew", "upgrade", ""]
+command = ["brew", "upgrade", "--verbose", ""]
 for i in outdated:
     if i in not_update:
         continue
-    command[2] = i
+    command[3] = i
     run(command, stderr=PIPE, text=True, check=False)
 
 
