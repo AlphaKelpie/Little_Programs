@@ -30,7 +30,7 @@ while i < len(vlist):
 
 #upgrade packages one by one
 for i in vlist:
-    print(f"\n\n\033[1;52mI'm checking to upgrade {i}\033[0;0m")
+    print(f"\n\n\033[1;38;5;208mI'm checking to upgrade {i}\033[0;0m")
     if i in not_upgrade:
         print(f"\033[0;31m{i} will not be upgraded\033[0;0m")
         continue
