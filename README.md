@@ -17,7 +17,7 @@ Then it looks for new pip's release.
 
 It stores all the packages installed with pip and check to upgrade each of them that are not in ```not_upgrade_pip.txt```.
 
-It print in orange the package. I red if it will not be upgraded. In cyan if it is already updated. In green if it has been upgraded.
+It print in orange the package. In red if it will not be upgraded. In cyan if it is already updated. In green if it has been upgraded.
 
 At the end clean the cache and upgrades ```not_upgrade_pip.txt``` file.
 
@@ -33,3 +33,17 @@ It prints all the outdated ones and then all the one it will try to upgrade.
 At the end it cleans the cache and prints all the packagest that have been outdated yet and upgrades ```not_upgrade.txt``` file.
 
 **Beware**: the upgrade of the still outdated packages could be download anyway. The script is not able to delete them. I suggest to use CCleaner or other programs when the code has finished.
+
+## Ansi_style.py
+
+### Guide of shell's output
+
+This code prints on shell texts with different colors, backgrownd, and style. It uses ANSI escape sequence.
+
+- Changes text color;
+- Changes backgrownd color;
+- Changes text and backgrownd;
+- Changes (text) color 8-bit;
+- Changes style.
+
+Some sequences are not supported on Mac Terminal app.
