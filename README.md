@@ -1,5 +1,6 @@
 # Little_Programs
-Some programs to menage
+
+Some programs to remember some tasks.
 
 ## Introduction
 
@@ -7,10 +8,18 @@ In this repository I put some program that could be usefull to menage packages, 
 I use them on a MacBookAir 6.2 with macOS Catalina 10.15.7 with a zsh shell. The Python version is Python 3.10.  
 In the next sections I will describe each program. The title of the section is the same of the name of the code.
 
-
 ## pip_upgrade.py
 
 ### Upgrade packages using pip
+
+First of all it looks for pip's packages that shall not be upgraded in ```not_upgrade_pip.txt``` file.
+Then it looks for new pip's release.
+
+It stores all the packages installed with pip and check to upgrade each of them that are not in ```not_upgrade_pip.txt```.
+
+It print in orange the package. I red if it will not be upgraded. In cyan if it is already updated. In green if it has been upgraded.
+
+At the end clean the cache.
 
 ## brew_upgrade.py
 
