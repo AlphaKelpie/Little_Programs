@@ -47,3 +47,15 @@ This code prints on shell texts with different colors, backgrownd, and style. It
 - Changes style.
 
 Some sequences are not supported on Mac Terminal app.
+
+## Multi.py
+
+### Multiprocessing example
+
+That is just an example how to use multiprocessing map.
+
+## Music_tag.py
+
+### Music_tag example
+
+That is just an example how to use music_tag.
