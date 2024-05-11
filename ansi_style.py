@@ -44,6 +44,11 @@ for i in range(8):
     for j in range(8):
         print(f"\033[0;{30 + i};{40 + j}m0;{30 + i};{40 + j}m\033[0;0m")
 
+print("\nColore sfumature (testo):")
+for i in range(16, 256):
+    print(f"\033[1;38;5;{i}m1;38;5;{i}m\033[0;0m")
+print("\nSelezionando 0;48;5;<n>m si cambia il colore dello sfondo.")
+
 print("\nCambia stile del testo:")
 print(f"\033[0;30m0;30m\033[0;0m normale")
 print(f"\033[1;30m1;30m\033[0;0m grassetto")
