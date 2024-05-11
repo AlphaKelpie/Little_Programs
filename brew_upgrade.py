@@ -9,12 +9,12 @@ ast_end = '\n' + '*'*30 + '\n' + '*'*30 + '\n\n'
 
 
 #upload list of packages to not upgrade
-not_update = []
+not_upgrade = []
 with open("not_upgrade.txt","r") as input_file:
     lines = input_file.readlines()
 for line in lines:
     line = line.replace('\n','')
-    not_update.append(line)
+    not_upgrade.append(line)
 
 
 #find outdated packages
@@ -22,7 +22,7 @@ packages = run(["brew", "outdated"], stdout=PIPE,
                           text=True, check=True)
 outdated = packages.stdout.split()
 print(ast_start, 'Packages that are outdated:\n', '\n'.join(str(i) for i in outdated), ast_end)
-will_be = list(set(outdated) - set(not_update))
+will_be = list(set(outdated) - set(not_upgrade))
 will_be.sort()
 print(ast_start, 'Packages that will be upgraded:\n',
       '\n'.join(str(i) for i in will_be), ast_end)
@@ -30,9 +30,7 @@ print(ast_start, 'Packages that will be upgraded:\n',
 
 #upgrade packages one by one & manage un-upgradable packages
 command = ["brew", "upgrade", "--verbose", ""]
-for i in outdated:
-    if i in not_update:
-        continue
+for i in will_be:
     command[3] = i
     run(command, stderr=PIPE, text=True, check=False)
 
