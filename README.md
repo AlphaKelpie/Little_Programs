@@ -59,3 +59,20 @@ That is just an example how to use multiprocessing map.
 ### Music_tag example
 
 That is just an example how to use music_tag.
+
+## Rename_by_creation.py
+
+### How to order files
+
+It renames files with specific extensions in a directory as the order of file creation date.
+
+## Send_email.py
+
+### Function to send email by code
+
+It requires a Gmail account and a device password.
+To use it you need to write at the begining of the script:
+
+```python
+from send_email import send_email
+````
