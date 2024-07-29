@@ -1,0 +1,6 @@
+{
+  "name" : "pippo",
+  "dependencies" : [
+    "fmt"
+  ]
+}
