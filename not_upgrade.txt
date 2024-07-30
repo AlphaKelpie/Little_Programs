@@ -3,6 +3,7 @@ emacs
 gd
 ghc
 graphviz
+gsl
 node
 pandoc
 root
