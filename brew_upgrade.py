@@ -29,9 +29,9 @@ print(ast_start, 'Packages that will be upgraded:\n',
 
 
 #upgrade packages one by one & manage un-upgradable packages
-command = ["brew", "upgrade", "--verbose", ""]
+command = ["brew", "upgrade", ""]
 for i in will_be:
-    command[3] = i
+    command[2] = i
     run(command, stderr=PIPE, text=True, check=False)
 
 
