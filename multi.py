@@ -8,10 +8,13 @@ def fun(i) :
     file.write(f'File {i}')
 
 if __name__ == "__main__" :
+  ll = list('abc')
   NUM = 16
   pool = mp.Pool(NUM)
   START = dt.now()
-  pool.map(fun, range(NUM))
+  # print start time
+  print(f"Start:\t{START}")
+  pool.map(fun, ll)
   pool.close()
   pool.join()
   END = dt.now()
