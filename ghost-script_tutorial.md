@@ -30,6 +30,7 @@ I device hanno poi delle opzioni specifiche.
 * dNOSAFER: disattiva le sicurezze;
 * dFirstPage: prima pagina dell'input da salvare nell'output;
 * dLastPage: ultima pagina (inclusa) dell'input da salvare nell'output;
+* dCompatibilityLevel: compressione. Imposta il grado tra compatibilità e compressione (1.4 è un buon rapporto);
 * q: ???
 
 ## Esempi
